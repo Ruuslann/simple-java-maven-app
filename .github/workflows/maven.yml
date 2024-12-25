@@ -16,17 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Set up JDK 21
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-
-      # Set up Maven
-      - name: Setup Maven Action
-        uses: s4u/setup-maven-action@v1.17.0
-
       # Bump Maven version
       - name: Bump version
         id: bump
@@ -34,9 +23,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build the Maven project
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      # Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       # Login to Docker Hub
       - name: Login to Docker Hub
