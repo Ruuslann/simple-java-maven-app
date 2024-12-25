@@ -15,7 +15,9 @@ jobs:
       with:
         java-version: 'latest'
         distribution: 'temurin'
-        maven-version: 'latest'
 
+    - name: Setup Maven Action
+      uses: s4u/setup-maven-action@v1.17.0
+    
     - name: Build with Maven
       run: mvn -B package --file pom.xml
