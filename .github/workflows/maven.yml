@@ -31,8 +31,8 @@ jobs:
       - name: Bump version
         id: bump
         uses: mickem/gh-action-bump-maven-version@v1.0.0
-        with:
-          new-version: "1.0.1" # Specify the desired version here
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Build the Maven project
       - name: Build with Maven
