@@ -39,4 +39,9 @@ jobs:
           tags: ${{ secrets.DOCKER_USER }}/app-name:latest
 
       - name: Test deployment
-        run: docker run ${{ secrets.DOCKER_USER }}/app-name:latest
+        run: |
+          OUTPUT=$(docker run ${{ secrets.DOCKER_USER }}/app-name:latest)
+          if [[ "$OUTPUT" != *"Hello World!"* ]]; then
+              echo "Container failed"
+              exit 1
+          fi
