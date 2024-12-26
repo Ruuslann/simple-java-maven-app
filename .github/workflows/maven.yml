@@ -37,3 +37,6 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKER_USER }}/app-name:latest
+
+      - name: Test deployment
+        run: docker run ${{ secrets.DOCKER_USER }}/app-name:latest
